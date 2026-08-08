@@ -142,6 +142,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'bedrooms' as const,
       badge: 'View 4 Suites',
+      previewImage: '/Bedrooms/bedroom-1.jpeg',
     },
     {
       label: 'Bathrooms',
@@ -151,6 +152,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'bathrooms' as const,
       badge: 'View 4 Marble Baths',
+      previewImage: '/Bathrooms/bathroom-1.jpeg',
     },
     {
       label: 'Living Space',
@@ -160,6 +162,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'livingspace' as const,
       badge: 'View Living Gallery',
+      previewImage: '/Living Space/living-space.jpeg',
     },
     {
       label: 'Private Grounds',
@@ -169,6 +172,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'villa' as const,
       badge: 'View Villa Grounds',
+      previewImage: '/villa/villa.jpeg',
     },
     {
       label: 'Subterranean Garage',
@@ -178,6 +182,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'garage' as const,
       badge: 'View Garage Bays',
+      previewImage: '/Garage/garage.jpeg',
     },
     {
       label: 'Wellness Spa',
@@ -187,6 +192,7 @@ export const PropertyInfo: React.FC = () => {
       isInteractive: true,
       modalType: 'spa' as const,
       badge: 'View Infinity Spa',
+      previewImage: '/Spa/spa.jpeg',
     },
   ];
 
@@ -234,44 +240,60 @@ export const PropertyInfo: React.FC = () => {
                 onClick={() => {
                   if (isClickable && stat.modalType) openGallery(stat.modalType);
                 }}
-                className={`group relative bg-[#0f0f0f] border rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${
+                className={`group relative rounded-2xl p-8 transition-all duration-500 overflow-hidden border min-h-[220px] flex flex-col justify-between ${
                   isClickable
-                    ? 'cursor-pointer border-[#c5a059]/40 hover:border-[#c5a059] hover:shadow-[#c5a059]/10 bg-gradient-to-b from-[#161410] to-[#0f0f0f]'
+                    ? 'cursor-pointer border-[#c5a059]/40 hover:border-[#c5a059] hover:shadow-2xl hover:shadow-[#c5a059]/15'
                     : 'border-white/10 hover:border-[#c5a059]/40'
                 }`}
               >
-                {/* Header Row */}
-                <div className="flex items-start justify-between mb-8">
-                  <span className="text-stone-500 font-mono text-xs">[{String(idx + 1).padStart(2, '0')}]</span>
+                {/* Background Image Preview */}
+                {stat.previewImage && (
+                  <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img
+                      src={stat.previewImage}
+                      alt={stat.label}
+                      className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700 filter brightness-90 contrast-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]/40 group-hover:via-[#0a0a0a]/60 transition-colors duration-500" />
+                  </div>
+                )}
+
+                {/* Card Foreground Content */}
+                <div className="relative z-10 flex items-start justify-between mb-6">
+                  <span className="text-stone-400 font-mono text-xs [text-shadow:_0_1px_8px_rgb(0_0_0_/_80%)]">
+                    [{String(idx + 1).padStart(2, '0')}]
+                  </span>
                   
                   <div className="flex items-center space-x-2">
                     {isClickable && (
-                      <span className="px-2.5 py-1 rounded-full bg-[#c5a059]/15 border border-[#c5a059]/40 text-[#c5a059] text-[10px] font-mono uppercase tracking-wider flex items-center space-x-1.5 animate-pulse">
-                        <Images className="w-3 h-3" />
+                      <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#c5a059]/50 text-[#c5a059] text-[10px] font-mono uppercase tracking-wider flex items-center space-x-1.5 shadow-lg">
+                        <Images className="w-3 h-3 text-[#c5a059]" />
                         <span>{stat.badge}</span>
                       </span>
                     )}
-                    <div className="p-3 rounded-full bg-white/5 border border-white/10 text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-black transition-all duration-300">
+                    <div className="p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-black transition-all duration-300 shadow-lg">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
                 </div>
 
-                <div className="font-serif text-5xl sm:text-6xl font-light text-white tracking-tight mb-3 group-hover:text-[#c5a059] transition-colors">
-                  {stat.value}
-                </div>
+                <div className="relative z-10">
+                  <div className="font-serif text-5xl sm:text-6xl font-light text-white tracking-tight mb-2 group-hover:text-[#c5a059] transition-colors [text-shadow:_0_2px_12px_rgb(0_0_0_/_90%)]">
+                    {stat.value}
+                  </div>
 
-                <div className="text-sm font-medium text-stone-200 uppercase tracking-wider mb-1">
-                  {stat.label}
-                </div>
+                  <div className="text-sm font-medium text-stone-100 uppercase tracking-wider mb-1 [text-shadow:_0_1px_8px_rgb(0_0_0_/_90%)]">
+                    {stat.label}
+                  </div>
 
-                <div className="text-xs font-mono text-stone-500 flex items-center justify-between">
-                  <span>{stat.detail}</span>
-                  {isClickable && (
-                    <span className="text-[#c5a059] font-semibold text-[11px] group-hover:underline">
-                      Click to explore →
-                    </span>
-                  )}
+                  <div className="text-xs font-mono text-stone-300 flex items-center justify-between pt-1">
+                    <span className="[text-shadow:_0_1px_8px_rgb(0_0_0_/_90%)]">{stat.detail}</span>
+                    {isClickable && (
+                      <span className="text-[#c5a059] font-semibold text-[11px] group-hover:underline [text-shadow:_0_1px_8px_rgb(0_0_0_/_90%)]">
+                        Click to view gallery →
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             );
