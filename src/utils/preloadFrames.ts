@@ -1,9 +1,9 @@
 /**
  * Frame Preloading & Caching Engine for Cinematic Scroll Experience
- * Total Frames: 240 WebP images (/frames/frame-0001.webp to /frames/frame-0240.webp)
+ * Total Frames: 192 WebP images (/frames/frame-0001.webp to /frames/frame-0192.webp)
  */
 
-export const TOTAL_FRAMES = 240;
+export const TOTAL_FRAMES = 192;
 
 /**
  * Returns formatted frame path matching the exact asset structure

@@ -13,10 +13,10 @@ export const CTA: React.FC<CTAProps> = ({ onOpenInquiry }) => {
   return (
     <section className="relative bg-[#080808] text-white pt-28 pb-10 px-6 md:px-12 lg:px-16 overflow-hidden border-t border-white/10 min-h-screen flex flex-col justify-between">
       
-      {/* Background Frame Visual (Last Frame frame-0240.webp) */}
+      {/* Background Frame Visual (Last Frame frame-0192.webp) */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/frames/frame-0240.webp"
+          src="/frames/frame-0192.webp"
           alt="The Residence Final Frame"
           className="w-full h-full object-cover opacity-35 filter contrast-105 brightness-90"
         />

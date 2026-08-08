@@ -54,7 +54,7 @@ export const Gallery: React.FC = () => {
       title: 'Sommelier Wine Vault',
       category: 'Amenities',
       aspect: 'col-span-1 md:col-span-6 aspect-[16/10]',
-      src: '/frames/frame-0240.webp',
+      src: '/frames/frame-0192.webp',
       caption: 'Climate-controlled 600-bottle glass wine display.',
     },
   ];
