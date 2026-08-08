@@ -7,55 +7,55 @@ export const Gallery: React.FC = () => {
 
   const categories = ['All', 'Exterior', 'Interior', 'Landscape', 'Amenities'];
 
-  // High resolution curated architectural items with WebP frame sample fallback visuals
+  // High resolution curated architectural gallery items using high-res estate photographs
   const galleryItems = [
     {
       id: 1,
       title: 'Monolithic Facade at Dusk',
       category: 'Exterior',
       aspect: 'col-span-1 md:col-span-8 aspect-[16/10]',
-      src: '/frames/frame-0010.webp',
-      caption: 'Khyber travertine blocks reflecting evening ambient lighting.',
+      src: '/villa/villa.jpeg',
+      caption: 'Khyber travertine blocks reflecting evening ambient lighting across 0.75 acres.',
     },
     {
       id: 2,
       title: 'Grand Living Gallery',
       category: 'Interior',
       aspect: 'col-span-1 md:col-span-4 aspect-[4/5]',
-      src: '/frames/frame-0060.webp',
-      caption: 'Double-height volume with floor-to-ceiling Swiss glass panels.',
+      src: '/Living Space/living-space.jpeg',
+      caption: 'Double-height volume with floor-to-ceiling Swiss glass panels and 7m ceiling clearance.',
     },
     {
       id: 3,
       title: 'Subterranean Infinity Pool',
       category: 'Amenities',
       aspect: 'col-span-1 md:col-span-4 aspect-[4/5]',
-      src: '/frames/frame-0120.webp',
-      caption: '22-meter heated rimless saltwater pool with acoustic baffles.',
+      src: '/Spa/spa.jpeg',
+      caption: '22-meter heated rimless saltwater pool with acoustic cedar baffles.',
     },
     {
       id: 4,
       title: 'Primary Master Sanctuary',
       category: 'Interior',
       aspect: 'col-span-1 md:col-span-8 aspect-[16/10]',
-      src: '/frames/frame-0180.webp',
+      src: '/Bedrooms/bedroom-1.jpeg',
       caption: 'Smoked black oak flooring with private mountain terrace access.',
     },
     {
       id: 5,
-      title: 'Courtyard Fire Lounge',
+      title: 'Courtyard Fire Lounge & Subterranean Bay',
       category: 'Landscape',
       aspect: 'col-span-1 md:col-span-6 aspect-[16/10]',
-      src: '/frames/frame-0220.webp',
-      caption: 'Sunken granite seating pit framed by native drought-resistant flora.',
+      src: '/Garage/garage.jpeg',
+      caption: 'Sunken granite seating pit framed by native drought-resistant flora & subterranean garage bays.',
     },
     {
       id: 6,
-      title: 'Sommelier Wine Vault',
+      title: 'Italian Calacatta Marble Spa Bath',
       category: 'Amenities',
       aspect: 'col-span-1 md:col-span-6 aspect-[16/10]',
-      src: '/frames/frame-0192.webp',
-      caption: 'Climate-controlled 600-bottle glass wine display.',
+      src: '/Bathrooms/bathroom-1.jpeg',
+      caption: 'Bookmatched Italian Calacatta marble with oversized soaking stone tub.',
     },
   ];
 

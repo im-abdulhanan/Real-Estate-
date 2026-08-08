@@ -12,6 +12,7 @@ export const Features: React.FC = () => {
       description: 'Custom 4K Laser Projection paired with acoustically tuned fabric walls and plush motorized Italian leather recliners.',
       icon: Film,
       bgGradient: 'from-[#1e1724] to-[#0f0c13]',
+      image: '/frames/frame-0060.webp',
     },
     {
       id: '02',
@@ -20,6 +21,7 @@ export const Features: React.FC = () => {
       description: '22-meter continuous rimless saltwater pool equipped with submerged hydrotherapy jets and underwater illumination.',
       icon: Waves,
       bgGradient: 'from-[#13222e] to-[#0c131a]',
+      image: '/Spa/spa.jpeg',
     },
     {
       id: '03',
@@ -28,6 +30,7 @@ export const Features: React.FC = () => {
       description: 'Automated bio-adaptive circadian lighting, motorized window shades, and multi-zone HVAC controlled via touch panels or phone.',
       icon: Cpu,
       bgGradient: 'from-[#18261e] to-[#0d1611]',
+      image: '/Living Space/living-space.jpeg',
     },
     {
       id: '04',
@@ -36,6 +39,7 @@ export const Features: React.FC = () => {
       description: 'Ultra-clear low-iron glass panels spanning floor-to-ceiling with hidden floor tracks for true seamless indoor-outdoor flow.',
       icon: Eye,
       bgGradient: 'from-[#1f242e] to-[#11141b]',
+      image: '/frames/frame-0010.webp',
     },
     {
       id: '05',
@@ -44,6 +48,7 @@ export const Features: React.FC = () => {
       description: 'Facial recognition entry gates, thermal infrared perimeter sensing, safe room infrastructure, and dedicated guardhouse quarters.',
       icon: ShieldCheck,
       bgGradient: 'from-[#2b1f1a] to-[#17110e]',
+      image: '/villa/villa.jpeg',
     },
     {
       id: '06',
@@ -52,6 +57,7 @@ export const Features: React.FC = () => {
       description: 'Precision temperature (12°C) and humidity management with custom oak rack displays behind UV-proof glass doors.',
       icon: Wine,
       bgGradient: 'from-[#291717] to-[#170c0c]',
+      image: '/Bathrooms/bathroom-1.jpeg',
     },
     {
       id: '07',
@@ -60,6 +66,7 @@ export const Features: React.FC = () => {
       description: 'Sunken granite seating pit framed by natural stone walls and gas-fired flame element for year-round evening gatherings.',
       icon: Flame,
       bgGradient: 'from-[#261f18] to-[#14100c]',
+      image: '/Garage/garage.jpeg',
     },
   ];
 
@@ -135,28 +142,42 @@ export const Features: React.FC = () => {
           <div className="lg:col-span-5 sticky top-32">
             {hoveredFeature !== null && (
               <div
-                className={`relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 bg-gradient-to-br ${featureList[hoveredFeature].bgGradient} p-8 flex flex-col justify-between shadow-2xl transition-all duration-500`}
+                className={`relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/20 bg-gradient-to-br ${featureList[hoveredFeature].bgGradient} p-8 flex flex-col justify-between shadow-2xl transition-all duration-500`}
               >
+                {/* Background Image Preview */}
+                {featureList[hoveredFeature].image && (
+                  <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img
+                      src={featureList[hoveredFeature].image}
+                      alt={featureList[hoveredFeature].name}
+                      className="w-full h-full object-cover opacity-45 filter contrast-105 brightness-90 scale-105 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/60 to-[#080808]/40" />
+                  </div>
+                )}
+
                 {/* Header Badge */}
-                <div className="flex items-center justify-between">
-                  <div className="px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs font-mono text-stone-300 flex items-center space-x-2">
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-mono text-stone-200 flex items-center space-x-2 shadow-lg">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#c5a059]" />
                     <span>VERIFIED AMENITY</span>
                   </div>
-                  <span className="font-mono text-xs text-stone-500">
+                  <span className="font-mono text-xs text-stone-300 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                     {featureList[hoveredFeature].id} / 07
                   </span>
                 </div>
 
                 {/* Center Icon Graphic */}
-                <div className="my-auto flex justify-center py-8">
-                  {React.createElement(featureList[hoveredFeature].icon, {
-                    className: 'w-20 h-20 text-[#c5a059] opacity-80 animate-pulse',
-                  })}
+                <div className="relative z-10 my-auto flex justify-center py-8">
+                  <div className="p-5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 shadow-xl">
+                    {React.createElement(featureList[hoveredFeature].icon, {
+                      className: 'w-16 h-16 text-[#c5a059] opacity-90 animate-pulse',
+                    })}
+                  </div>
                 </div>
 
                 {/* Bottom Details */}
-                <div className="space-y-3 bg-black/60 backdrop-blur-xl p-6 rounded-2xl border border-white/10">
+                <div className="relative z-10 space-y-3 bg-black/75 backdrop-blur-xl p-6 rounded-2xl border border-white/15 shadow-2xl">
                   <span className="text-[10px] font-mono tracking-widest text-[#c5a059] uppercase block">
                     {featureList[hoveredFeature].tagline}
                   </span>

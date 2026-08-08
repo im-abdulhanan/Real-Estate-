@@ -7,10 +7,14 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [scrollPercentage, setScrollPercentage] = useState<number>(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollPercentage(Math.min(100, Math.max(0, progress)));
       setIsScrolled(window.scrollY > 40);
     };
 
@@ -88,6 +92,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
               {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
+        </div>
+
+        {/* GOLD SCROLL PROGRESS INDICATOR LINE (FIXED AT NAVBAR BOTTOM) */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden pointer-events-none">
+          <div
+            className="h-full bg-gradient-to-r from-[#c5a059] via-[#e8c57b] to-[#c5a059] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(197,160,89,0.9)]"
+            style={{ width: `${scrollPercentage}%` }}
+          />
         </div>
       </header>
 
