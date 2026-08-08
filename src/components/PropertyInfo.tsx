@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BedDouble, Bath, Maximize, Trees, Car, Sparkles, X, ChevronLeft, ChevronRight, Images } from 'lucide-react';
 
 export const PropertyInfo: React.FC = () => {
-  const [activeModal, setActiveModal] = useState<'bedrooms' | 'bathrooms' | null>(null);
+  const [activeModal, setActiveModal] = useState<'bedrooms' | 'bathrooms' | 'livingspace' | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
   const bedroomImages = [
@@ -59,7 +59,20 @@ export const PropertyInfo: React.FC = () => {
     },
   ];
 
-  const currentGalleryImages = activeModal === 'bedrooms' ? bedroomImages : bathroomImages;
+  const livingSpaceImages = [
+    {
+      src: '/Living Space/living-space.jpeg',
+      title: 'Grand Architectural Living Gallery',
+      subtitle: '8,500 SQ FT Built-Up · Open Plan',
+      description: 'Double-height 7-meter ceilings with frameless Swiss glazing panels, floating hearth fireplace, and custom acoustic timber ceiling baffles.',
+    },
+  ];
+
+  const currentGalleryImages = activeModal === 'bedrooms' 
+    ? bedroomImages 
+    : activeModal === 'bathrooms' 
+    ? bathroomImages 
+    : livingSpaceImages;
 
   // Handle keyboard navigation inside gallery modals
   useEffect(() => {
@@ -82,7 +95,7 @@ export const PropertyInfo: React.FC = () => {
     setActiveImageIndex((prev) => (prev - 1 + currentGalleryImages.length) % currentGalleryImages.length);
   };
 
-  const openGallery = (type: 'bedrooms' | 'bathrooms') => {
+  const openGallery = (type: 'bedrooms' | 'bathrooms' | 'livingspace') => {
     setActiveModal(type);
     setActiveImageIndex(0);
   };
@@ -106,7 +119,15 @@ export const PropertyInfo: React.FC = () => {
       modalType: 'bathrooms' as const,
       badge: 'View 4 Marble Baths',
     },
-    { label: 'Living Space', value: '8,500', detail: 'Square Feet Built-Up', icon: Maximize, isInteractive: false },
+    {
+      label: 'Living Space',
+      value: '8,500',
+      detail: 'Square Feet Built-Up',
+      icon: Maximize,
+      isInteractive: true,
+      modalType: 'livingspace' as const,
+      badge: 'View Living Gallery',
+    },
     { label: 'Private Grounds', value: '0.75', detail: 'Acres Landscaped Estate', icon: Trees, isInteractive: false },
     { label: 'Subterranean Garage', value: '04', detail: 'Climate-Controlled Bays', icon: Car, isInteractive: false },
     { label: 'Wellness Spa', value: '01', detail: 'Heated Infinity Pool', icon: Sparkles, isInteractive: false },
@@ -219,7 +240,7 @@ export const PropertyInfo: React.FC = () => {
 
       </div>
 
-      {/* --- GALLERY LIGHTBOX MODAL (BEDROOMS & BATHROOMS) --- */}
+      {/* --- GALLERY LIGHTBOX MODAL (BEDROOMS, BATHROOMS, LIVING SPACE) --- */}
       {activeModal !== null && (
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8">
           
@@ -232,28 +253,32 @@ export const PropertyInfo: React.FC = () => {
             <X className="w-6 h-6" />
           </button>
 
-          {/* Previous Image Button */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 sm:left-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white border border-white/20 transition-colors z-50"
-            title="Previous"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+          {/* Previous Image Button (only if multiple images) */}
+          {currentGalleryImages.length > 1 && (
+            <button
+              onClick={prevImage}
+              className="absolute left-4 sm:left-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white border border-white/20 transition-colors z-50"
+              title="Previous"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          )}
 
-          {/* Next Image Button */}
-          <button
-            onClick={nextImage}
-            className="absolute right-4 sm:right-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white border border-white/20 transition-colors z-50"
-            title="Next"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+          {/* Next Image Button (only if multiple images) */}
+          {currentGalleryImages.length > 1 && (
+            <button
+              onClick={nextImage}
+              className="absolute right-4 sm:right-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white border border-white/20 transition-colors z-50"
+              title="Next"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          )}
 
           {/* Modal Card Content Container */}
           <div className="max-w-5xl w-full bg-[#111111] border border-white/20 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row my-auto">
             
-            {/* Left: Large Suite Photograph */}
+            {/* Left: Large Photograph */}
             <div className="relative lg:w-3/5 aspect-[4/3] lg:aspect-auto overflow-hidden bg-black">
               <img
                 src={currentGalleryImages[activeImageIndex].src}
@@ -261,11 +286,11 @@ export const PropertyInfo: React.FC = () => {
                 className="w-full h-full object-cover transition-all duration-700"
               />
               <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-md border border-white/10 text-xs font-mono text-[#c5a059]">
-                0{activeImageIndex + 1} OF 04 · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : 'ITALIAN MARBLE BATHROOMS'}
+                0{activeImageIndex + 1} OF 0{currentGalleryImages.length} · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : activeModal === 'bathrooms' ? 'ITALIAN MARBLE BATHROOMS' : 'GRAND LIVING SPACE'}
               </div>
             </div>
 
-            {/* Right: Suite Architectural Specs & Thumbnail Strip */}
+            {/* Right: Architectural Specs & Thumbnail Strip */}
             <div className="lg:w-2/5 p-8 sm:p-10 flex flex-col justify-between space-y-6">
               
               <div>
@@ -280,27 +305,29 @@ export const PropertyInfo: React.FC = () => {
                 </p>
               </div>
 
-              {/* Thumbnail Selector Strip */}
-              <div className="space-y-3 pt-6 border-t border-white/10">
-                <span className="text-[10px] font-mono text-stone-400 uppercase tracking-widest block">
-                  Select {activeModal === 'bedrooms' ? 'Bedroom Suite' : 'Marble Bathroom'}
-                </span>
-                <div className="grid grid-cols-4 gap-2">
-                  {currentGalleryImages.map((img, idx) => (
-                    <button
-                      key={img.title}
-                      onClick={() => setActiveImageIndex(idx)}
-                      className={`relative aspect-[4/3] rounded-lg overflow-hidden border transition-all duration-300 ${
-                        activeImageIndex === idx
-                          ? 'border-[#c5a059] ring-2 ring-[#c5a059]/40 opacity-100 scale-105'
-                          : 'border-white/10 opacity-50 hover:opacity-100'
-                      }`}
-                    >
-                      <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
+              {/* Thumbnail Selector Strip (if multiple) */}
+              {currentGalleryImages.length > 1 && (
+                <div className="space-y-3 pt-6 border-t border-white/10">
+                  <span className="text-[10px] font-mono text-stone-400 uppercase tracking-widest block">
+                    Select View
+                  </span>
+                  <div className="grid grid-cols-4 gap-2">
+                    {currentGalleryImages.map((img, idx) => (
+                      <button
+                        key={img.title}
+                        onClick={() => setActiveImageIndex(idx)}
+                        className={`relative aspect-[4/3] rounded-lg overflow-hidden border transition-all duration-300 ${
+                          activeImageIndex === idx
+                            ? 'border-[#c5a059] ring-2 ring-[#c5a059]/40 opacity-100 scale-105'
+                            : 'border-white/10 opacity-50 hover:opacity-100'
+                        }`}
+                      >
+                        <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
             </div>
 
