@@ -104,7 +104,7 @@ export const PropertyInfo: React.FC = () => {
       icon: Bath,
       isInteractive: true,
       modalType: 'bathrooms' as const,
-      badge: 'View 4 Baths',
+      badge: 'View 4 Marble Baths',
     },
     { label: 'Living Space', value: '8,500', detail: 'Square Feet Built-Up', icon: Maximize, isInteractive: false },
     { label: 'Private Grounds', value: '0.75', detail: 'Acres Landscaped Estate', icon: Trees, isInteractive: false },
@@ -261,7 +261,7 @@ export const PropertyInfo: React.FC = () => {
                 className="w-full h-full object-cover transition-all duration-700"
               />
               <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-md border border-white/10 text-xs font-mono text-[#c5a059]">
-                0{activeImageIndex + 1} OF 04 · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : 'MARBLE BATHROOMS'}
+                0{activeImageIndex + 1} OF 04 · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : 'ITALIAN MARBLE BATHROOMS'}
               </div>
             </div>
 
@@ -283,7 +283,7 @@ export const PropertyInfo: React.FC = () => {
               {/* Thumbnail Selector Strip */}
               <div className="space-y-3 pt-6 border-t border-white/10">
                 <span className="text-[10px] font-mono text-stone-400 uppercase tracking-widest block">
-                  Select {activeModal === 'bedrooms' ? 'Bedroom Suite' : 'Bathroom Gallery'}
+                  Select {activeModal === 'bedrooms' ? 'Bedroom Suite' : 'Marble Bathroom'}
                 </span>
                 <div className="grid grid-cols-4 gap-2">
                   {currentGalleryImages.map((img, idx) => (
