@@ -7,14 +7,14 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [scrollPercentage, setScrollPercentage] = useState<number>(0);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-      setScrollPercentage(Math.min(100, Math.max(0, progress)));
+      const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
+      setScrollProgress(Math.min(1, Math.max(0, progress)));
       setIsScrolled(window.scrollY > 40);
     };
 
@@ -94,11 +94,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
           </div>
         </div>
 
-        {/* GOLD SCROLL PROGRESS INDICATOR LINE (FIXED AT NAVBAR BOTTOM) */}
+        {/* GOLD LIQUID SCROLL PROGRESS INDICATOR LINE (SILKY SMOOTH GPU TRANSFORM) */}
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden pointer-events-none">
           <div
-            className="h-full bg-gradient-to-r from-[#c5a059] via-[#e8c57b] to-[#c5a059] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(197,160,89,0.9)]"
-            style={{ width: `${scrollPercentage}%` }}
+            className="h-full w-full bg-gradient-to-r from-[#c5a059] via-[#f3d99d] to-[#c5a059] origin-left transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_12px_rgba(197,160,89,0.9)] will-change-transform"
+            style={{ transform: `scaleX(${scrollProgress})` }}
           />
         </div>
       </header>
