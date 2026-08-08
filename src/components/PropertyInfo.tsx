@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BedDouble, Bath, Maximize, Trees, Car, Sparkles, X, ChevronLeft, ChevronRight, Images } from 'lucide-react';
 
 export const PropertyInfo: React.FC = () => {
-  const [activeModal, setActiveModal] = useState<'bedrooms' | 'bathrooms' | 'livingspace' | 'villa' | 'garage' | null>(null);
+  const [activeModal, setActiveModal] = useState<'bedrooms' | 'bathrooms' | 'livingspace' | 'villa' | 'garage' | 'spa' | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
   const bedroomImages = [
@@ -86,6 +86,15 @@ export const PropertyInfo: React.FC = () => {
     },
   ];
 
+  const spaImages = [
+    {
+      src: '/Spa/spa.jpeg',
+      title: 'Wellness Spa & Heated Infinity Pool',
+      subtitle: '22m Saltwater Pool · Subterranean Wellness Suite',
+      description: 'Private wellness sanctuary featuring a 22-meter rimless saltwater infinity pool, dry cedar sauna, steam room, and hydrotherapy spa jets.',
+    },
+  ];
+
   const currentGalleryImages = activeModal === 'bedrooms' 
     ? bedroomImages 
     : activeModal === 'bathrooms' 
@@ -94,7 +103,9 @@ export const PropertyInfo: React.FC = () => {
     ? livingSpaceImages
     : activeModal === 'villa'
     ? villaImages
-    : garageImages;
+    : activeModal === 'garage'
+    ? garageImages
+    : spaImages;
 
   // Handle keyboard navigation inside gallery modals
   useEffect(() => {
@@ -117,7 +128,7 @@ export const PropertyInfo: React.FC = () => {
     setActiveImageIndex((prev) => (prev - 1 + currentGalleryImages.length) % currentGalleryImages.length);
   };
 
-  const openGallery = (type: 'bedrooms' | 'bathrooms' | 'livingspace' | 'villa' | 'garage') => {
+  const openGallery = (type: 'bedrooms' | 'bathrooms' | 'livingspace' | 'villa' | 'garage' | 'spa') => {
     setActiveModal(type);
     setActiveImageIndex(0);
   };
@@ -168,7 +179,15 @@ export const PropertyInfo: React.FC = () => {
       modalType: 'garage' as const,
       badge: 'View Garage Bays',
     },
-    { label: 'Wellness Spa', value: '01', detail: 'Heated Infinity Pool', icon: Sparkles, isInteractive: false },
+    {
+      label: 'Wellness Spa',
+      value: '01',
+      detail: 'Heated Infinity Pool',
+      icon: Sparkles,
+      isInteractive: true,
+      modalType: 'spa' as const,
+      badge: 'View Infinity Spa',
+    },
   ];
 
   return (
@@ -278,7 +297,7 @@ export const PropertyInfo: React.FC = () => {
 
       </div>
 
-      {/* --- GALLERY LIGHTBOX MODAL (BEDROOMS, BATHROOMS, LIVING SPACE, VILLA GROUNDS, GARAGE) --- */}
+      {/* --- GALLERY LIGHTBOX MODAL (BEDROOMS, BATHROOMS, LIVING SPACE, VILLA GROUNDS, GARAGE, SPA) --- */}
       {activeModal !== null && (
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8">
           
@@ -324,7 +343,7 @@ export const PropertyInfo: React.FC = () => {
                 className="w-full h-full object-cover transition-all duration-700"
               />
               <div className="absolute top-4 left-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-md border border-white/10 text-xs font-mono text-[#c5a059]">
-                0{activeImageIndex + 1} OF 0{currentGalleryImages.length} · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : activeModal === 'bathrooms' ? 'ITALIAN MARBLE BATHROOMS' : activeModal === 'livingspace' ? 'GRAND LIVING SPACE' : activeModal === 'villa' ? 'ESTATE GROUNDS & VILLA' : 'SUBTERRANEAN GARAGE BAYS'}
+                0{activeImageIndex + 1} OF 0{currentGalleryImages.length} · {activeModal === 'bedrooms' ? 'BEDROOM SUITES' : activeModal === 'bathrooms' ? 'ITALIAN MARBLE BATHROOMS' : activeModal === 'livingspace' ? 'GRAND LIVING SPACE' : activeModal === 'villa' ? 'ESTATE GROUNDS & VILLA' : activeModal === 'garage' ? 'SUBTERRANEAN GARAGE BAYS' : 'WELLNESS SPA & INFINITY POOL'}
               </div>
             </div>
 
